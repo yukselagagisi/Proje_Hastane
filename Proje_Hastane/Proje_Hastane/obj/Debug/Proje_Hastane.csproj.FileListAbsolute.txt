@@ -1,0 +1,23 @@
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.csproj.AssemblyReference.cache
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.Properties.Resources.resources
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.csproj.GenerateResource.cache
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.csproj.CoreCompileInputs.cache
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.AnaSayfaFrm.resources
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.DoktorBilgiDuzenle.resources
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.HastaBilgiDuzenleFrm.resources
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.DoktorDetayFrm.resources
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.DoktorGirisFrm.resources
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.HastaDetayFrm.resources
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.HastaGirisFrm.resources
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.HastaKayitFrm.resources
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.SekreterBransPaneliFrm.resources
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.SekreterDetayFrm.resources
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.SekreterDoktorPaneliFrm.resources
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.SekreterGirisFrm.resources
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.SekreterRandevuListesiFrm.resources
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\bin\Debug\SeaGreen Hospital Hastane Yönetim Sistemi.exe.config
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\bin\Debug\SeaGreen Hospital Hastane Yönetim Sistemi.exe
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\bin\Debug\SeaGreen Hospital Hastane Yönetim Sistemi.pdb
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\SeaGreen Hospital Hastane Yönetim Sistemi.exe
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\SeaGreen Hospital Hastane Yönetim Sistemi.pdb
+D:\Users\Stepne\source\repos\Proje_Hastane\Proje_Hastane\obj\Debug\Proje_Hastane.SekreterDuyurularFrm.resources
