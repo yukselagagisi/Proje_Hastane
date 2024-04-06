@@ -88,7 +88,7 @@ Page where secretaries can add, delete and update doctors.
 
 Branch Panel
 
-![image](https://github.com/yukselagagisi/Proje_Hastane/assets/46592226/642e0b0c-1c9b-4577-bd0e-5d0f6b8bdb7a)
+![image](https://github.com/yukselagagisi/Proje_Hastane/assets/46592226/2a99f1c4-02ca-4c79-bffc-5afc13db6910)
 
 Page where secretaries can add and update branches.
 
