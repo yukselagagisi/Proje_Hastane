@@ -20,11 +20,11 @@ namespace Proje_Hastane
             _sekreterDetayFrm = sekreterDetayFrm;
         }
 
-        private void BransListele() 
+        private void BransListele()
         {
             using (SqlConnection conn = new SqlConnection(SQLBaglantisi.connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM TBLBRANSLAR", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT BRANSID, BRANSAD, BRANSDURUM = CASE WHEN BRANSDURUM = 1 THEN 'AKTİF' WHEN BRANSDURUM = 0 THEN 'PASİF' END FROM TBLBRANSLAR", conn))
                 {
                     using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
