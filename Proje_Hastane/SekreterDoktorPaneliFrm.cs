@@ -43,9 +43,9 @@ namespace Proje_Hastane
             DoktorListele();
 
             // Branş Comboboxını Doldurma
-            foreach (string brans in _sekreterDetayFrm.Branslar)
+            foreach (DataRow brans in _sekreterDetayFrm.Branslar)
             {
-                BransCmb.Items.Add(brans);
+                BransCmb.Items.Add(brans[1]);
             }
         }
 
@@ -58,7 +58,7 @@ namespace Proje_Hastane
                 {
                     cmd.Parameters.AddWithValue("@p1", AdTxt.Text.Length > 0 ? AdTxt.Text.ToUpper() : "null");
                     cmd.Parameters.AddWithValue("@p2", SoyadTxt.Text.Length > 0 ? SoyadTxt.Text.ToUpper() : "null");
-                    cmd.Parameters.AddWithValue("@p3", BransCmb.Text.Length > 0 ? BransCmb.SelectedIndex + 1 : -1);
+                    cmd.Parameters.AddWithValue("@p3", BransCmb.Text.Length > 0 ? BransCmb.SelectedValue : -1);
                     cmd.Parameters.AddWithValue("@p4", TCNOTxt.Text.Length > 0 ? TCNOTxt.Text : "00000000000");
                     cmd.Parameters.AddWithValue("@p5", SifreTxt.Text.Length > 0 ? SifreTxt.Text : "null");
                     cmd.ExecuteNonQuery();
@@ -105,7 +105,7 @@ namespace Proje_Hastane
                 {
                     cmd.Parameters.AddWithValue("@p1", AdTxt.Text.Length > 0 ? AdTxt.Text.ToUpper() : "null");
                     cmd.Parameters.AddWithValue("@p2", SoyadTxt.Text.Length > 0 ? SoyadTxt.Text.ToUpper() : "null");
-                    cmd.Parameters.AddWithValue("@p3", BransCmb.Text.Length > 0 ? BransCmb.SelectedIndex+1 : -1);
+                    cmd.Parameters.AddWithValue("@p3", BransCmb.Text.Length > 0 ? BransCmb.SelectedValue : -1);
                     cmd.Parameters.AddWithValue("@p4", SifreTxt.Text.Length > 0 ? SifreTxt.Text.ToUpper() : "null");
                     cmd.Parameters.AddWithValue("@p5", TCNOTxt.Text.Length > 0 ? TCNOTxt.Text.ToUpper() : "00000000000");
                     cmd.ExecuteNonQuery();

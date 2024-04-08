@@ -130,6 +130,7 @@
             // 
             // BransCmb
             // 
+            this.BransCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.BransCmb.FormattingEnabled = true;
             this.BransCmb.Location = new System.Drawing.Point(137, 135);
             this.BransCmb.Name = "BransCmb";

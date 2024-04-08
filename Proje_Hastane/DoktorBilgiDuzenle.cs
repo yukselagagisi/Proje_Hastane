@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Proje_Hastane
 {
@@ -29,6 +30,25 @@ namespace Proje_Hastane
 
         private void DoktorBilgiDuzenle_Load(object sender, EventArgs e)
         {
+            //ComboBox'a Branşları Çekme
+            using (SqlConnection conn = new SqlConnection(SQLBaglantisi.connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM TBLBRANSLAR", conn))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+
+                        da.Fill(dt);
+                        BransCmb.ValueMember = dt.Columns["BRANSID"].ColumnName;
+                        BransCmb.DisplayMember = dt.Columns["BRANSAD"].ColumnName;
+                        BransCmb.DataSource = dt;
+
+                    }
+                }
+
+            }
+
             TCTxt.Text = _TCNO;
             using (SqlConnection conn = new SqlConnection(SQLBaglantisi.connectionString))
             {
@@ -50,24 +70,6 @@ namespace Proje_Hastane
                 }
                 conn.Close();
             }
-
-            //ComboBox'a Branşları Çekme
-            using (SqlConnection conn = new SqlConnection(SQLBaglantisi.connectionString))
-            {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM TBLBRANSLAR", conn))
-                {
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        while (dr.Read())
-                        {
-                            BransCmb.Items.Add(dr[1].ToString());
-                        }
-                        dr.Close();
-                    }
-                }
-                conn.Close();
-            }
         }
 
         private void BilgiGuncelleBtn_Click(object sender, EventArgs e)
@@ -75,11 +77,11 @@ namespace Proje_Hastane
             using (SqlConnection conn = new SqlConnection(SQLBaglantisi.connectionString))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("UPDATE TBLDOKTORLAR SET DOKTORAD = @p1, DOKTORSOYAD = @p2, DOKTORBRANS = @p3, DOKTORTC = @p4, DOKTORSIFRE = @p5 WHERE DOKTORTC = @p6", conn)) 
+                using (SqlCommand cmd = new SqlCommand("UPDATE TBLDOKTORLAR SET DOKTORAD = @p1, DOKTORSOYAD = @p2, DOKTORBRANS = @p3, DOKTORTC = @p4, DOKTORSIFRE = @p5 WHERE DOKTORTC = @p6", conn))
                 {
                     cmd.Parameters.AddWithValue("@p1", AdTxt.Text.Length > 0 ? AdTxt.Text.ToUpper() : "null");
                     cmd.Parameters.AddWithValue("@p2", SoyadTxt.Text.Length > 0 ? SoyadTxt.Text.ToUpper() : "null");
-                    cmd.Parameters.AddWithValue("@p3", BransCmb.SelectedIndex + 1);
+                    cmd.Parameters.AddWithValue("@p3", BransCmb.SelectedValue);
                     cmd.Parameters.AddWithValue("@p4", TCTxt.Text.Length > 0 ? TCTxt.Text.ToUpper() : "null");
                     cmd.Parameters.AddWithValue("@p5", SifreTxt.Text.Length > 0 ? SifreTxt.Text.ToUpper() : "null");
                     cmd.Parameters.AddWithValue("@p6", _TCNO);

@@ -201,7 +201,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="588hospital_100778.ico" />
     <Content Include="5928530_building_estate_healthcare_hospital_medical_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

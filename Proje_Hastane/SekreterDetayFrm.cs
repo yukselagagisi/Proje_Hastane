@@ -16,7 +16,7 @@ namespace Proje_Hastane
     {
         SekreterGirisFrm _sekreterGirisFrm;
         string _TCNO;
-        List<string> _branslar = new List<string>();
+        List<DataRow> _branslar = new List<DataRow>();
         System.Int32 _randevuID;
 
         public SekreterDetayFrm(SekreterGirisFrm sekreterGirisFrm, string TCNO)
@@ -26,7 +26,7 @@ namespace Proje_Hastane
             _TCNO = TCNO;
         }
 
-        public List<string> Branslar
+        public List<DataRow> Branslar
         {
             get { return _branslar; }
         }
@@ -79,21 +79,20 @@ namespace Proje_Hastane
                 {
                     using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
-                        using (DataTable dt = new DataTable())
-                        {
-                            da.Fill(dt);
-                            dataGridView1.DataSource = dt;
+                        DataTable dt = new DataTable();
 
-                            // Branşları comboboxa çekme
-                            using (SqlDataReader dr = cmd.ExecuteReader())
-                            {
-                                while (dr.Read())
-                                {
-                                    BransCmb.Items.Add(dr[1].ToString());
-                                    _branslar.Add(dr[1].ToString());
-                                }
-                                dr.Close();
-                            }
+                        da.Fill(dt);
+                        dataGridView1.DataSource = dt;
+
+                        // Branşları comboboxa çekme
+                        BransCmb.ValueMember = "ID";
+                        BransCmb.DisplayMember = "BRANŞ";
+                        BransCmb.DataSource = dt;
+                        BransCmb.SelectedIndex = -1;
+                        
+                        foreach (DataRow dr in dt.Rows) 
+                        {
+                            _branslar.Add(dr);
                         }
                     }
                 }
@@ -137,9 +136,9 @@ namespace Proje_Hastane
                             using (SqlCommand cmd2 = new SqlCommand("INSERT INTO TBLRANDEVULAR (RANDEVUTARIHSAAT, RANDEVUBRANS, RANDEVUDOKTOR, RANDEVUDURUM) VALUES (@p3, @p4, @p5, @p6)", conn))
                             {
                                 cmd2.Parameters.AddWithValue("@p3", TarihDtp.Text);
-                                cmd2.Parameters.AddWithValue("@p4", BransCmb.SelectedIndex+1);
+                                cmd2.Parameters.AddWithValue("@p4", BransCmb.SelectedValue);
                                 cmd2.Parameters.AddWithValue("@p5", dr[0]);
-                                
+
                                 switch (AktifRb.Checked)
                                 {
                                     case true: cmd2.Parameters.AddWithValue("@p6", "1"); break;
@@ -164,24 +163,22 @@ namespace Proje_Hastane
 
         private void BransCmb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DoktorCmb.Items.Clear();
             // Doktorları comboboxa çekme
             using (SqlConnection conn = new SqlConnection(SQLBaglantisi.connectionString))
             {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT TBLDOKTORLAR.DOKTORAD + ' ' + TBLDOKTORLAR.DOKTORSOYAD AS 'AD SOYAD', TBLBRANSLAR.BRANSAD BRANŞ FROM TBLDOKTORLAR LEFT JOIN TBLBRANSLAR ON TBLDOKTORLAR.DOKTORBRANS = TBLBRANSLAR.BRANSID WHERE TBLBRANSLAR.BRANSID = @p1", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT TBLDOKTORLAR.DOKTORID ,TBLDOKTORLAR.DOKTORAD + ' ' + TBLDOKTORLAR.DOKTORSOYAD AS 'AD SOYAD', TBLBRANSLAR.BRANSAD BRANŞ FROM TBLDOKTORLAR LEFT JOIN TBLBRANSLAR ON TBLDOKTORLAR.DOKTORBRANS = TBLBRANSLAR.BRANSID WHERE TBLBRANSLAR.BRANSID = @p1", conn))
                 {
                     cmd.Parameters.AddWithValue("@p1", BransCmb.Text.Length > 0 ? BransCmb.SelectedIndex + 1 : -1);
-                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd)) 
                     {
-                        while (dr.Read())
-                        {
-                            DoktorCmb.Items.Add(dr[0].ToString());
-                        }
-                        dr.Close();
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        DoktorCmb.ValueMember = "DOKTORID";
+                        DoktorCmb.DisplayMember = "AD SOYAD";
+                        DoktorCmb.DataSource = dt;
                     }
                 }
-                conn.Close();
             }
         }
 

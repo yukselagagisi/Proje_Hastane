@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Proje_Hastane
 {
@@ -86,42 +87,41 @@ namespace Proje_Hastane
             //ComboBox'a Branşları Çekme
             using (SqlConnection conn = new SqlConnection(SQLBaglantisi.connectionString))
             {
-                conn.Open();
                 using (SqlCommand cmd = new SqlCommand("SELECT * FROM TBLBRANSLAR", conn))
                 {
-                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
-                        while (dr.Read())
-                        {
-                            BransCmb.Items.Add(dr[1].ToString());
-                        }
-                        dr.Close();
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        BransCmb.ValueMember = "BRANSID";
+                        BransCmb.DisplayMember = "BRANSAD";
+                        BransCmb.DataSource = dt;
+                        BransCmb.SelectedIndex = -1;
+
                     }
                 }
-                conn.Close();
             }
         }
 
         private void BransCmb_SelectedIndexChanged(object sender, EventArgs e)
         {
             //ComboBox'a Seçilen Branş'ın Doktorunu Çekme
-            DoktorCmb.Items.Clear();
             using (SqlConnection conn = new SqlConnection(SQLBaglantisi.connectionString))
             {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT DOKTORAD + ' ' + DOKTORSOYAD FROM TBLDOKTORLAR LEFT JOIN TBLBRANSLAR ON TBLDOKTORLAR.DOKTORBRANS = TBLBRANSLAR.BRANSID WHERE TBLBRANSLAR.BRANSAD = @p1", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT DOKTORID ,DOKTORAD + ' ' + DOKTORSOYAD ADSOYAD FROM TBLDOKTORLAR LEFT JOIN TBLBRANSLAR ON TBLDOKTORLAR.DOKTORBRANS = TBLBRANSLAR.BRANSID WHERE TBLBRANSLAR.BRANSAD = @p1", conn))
                 {
                     cmd.Parameters.AddWithValue("@p1", BransCmb.Text.Length > 0 ? BransCmb.Text : "null");
-                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
-                        while (dr.Read())
-                        {
-                            DoktorCmb.Items.Add(dr[0]);
-                        }
-                        dr.Close();
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        DoktorCmb.ValueMember = "DOKTORID";
+                        DoktorCmb.DisplayMember = "ADSOYAD";
+                        DoktorCmb.DataSource = dt;
                     }
                 }
-                conn.Close();
             }
         }
 
@@ -166,7 +166,7 @@ namespace Proje_Hastane
                     {
                         dr.Read();
 
-                        using (SqlCommand cmd2 = new SqlCommand("UPDATE TBLRANDEVULAR SET RANDEVUHASTA = @p2, RANDEVUDETAY = @p3, RANDEVUDURUM = 0 WHERE RANDEVUID = @p4", conn)) 
+                        using (SqlCommand cmd2 = new SqlCommand("UPDATE TBLRANDEVULAR SET RANDEVUHASTA = @p2, RANDEVUDETAY = @p3, RANDEVUDURUM = 0 WHERE RANDEVUID = @p4", conn))
                         {
                             cmd2.Parameters.AddWithValue("@p2", Convert.ToInt32(dr[0]));
                             cmd2.Parameters.AddWithValue("@p3", NotTxt.Text);

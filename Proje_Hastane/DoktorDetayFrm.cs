@@ -29,19 +29,17 @@ namespace Proje_Hastane
 
         private void RandevuListele()
         {
-            using (SqlConnection conn = new SqlConnection(SQLBaglantisi.connectionString)) 
+            using (SqlConnection conn = new SqlConnection(SQLBaglantisi.connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT RANDEVUID, RANDEVUTARIHSAAT, BRANSAD, HASTAAD + ' ' + HASTASOYAD HASTA, RANDEVUDETAY FROM TBLRANDEVULAR LEFT JOIN TBLBRANSLAR ON RANDEVUBRANS = BRANSID LEFT JOIN TBLDOKTORLAR ON RANDEVUDOKTOR = DOKTORID LEFT JOIN TBLHASTALAR ON RANDEVUHASTA = HASTAID WHERE DOKTORTC = @p1 AND RANDEVUDURUM = 0", conn)) 
+                using (SqlCommand cmd = new SqlCommand("SELECT RANDEVUID, RANDEVUTARIHSAAT, BRANSAD, HASTAAD + ' ' + HASTASOYAD HASTA, RANDEVUDETAY FROM TBLRANDEVULAR LEFT JOIN TBLBRANSLAR ON RANDEVUBRANS = BRANSID LEFT JOIN TBLDOKTORLAR ON RANDEVUDOKTOR = DOKTORID LEFT JOIN TBLHASTALAR ON RANDEVUHASTA = HASTAID WHERE DOKTORTC = @p1 AND RANDEVUDURUM = 0", conn))
                 {
                     cmd.Parameters.AddWithValue("@p1", _TCNO);
 
-                    using (SqlDataAdapter da = new SqlDataAdapter(cmd)) 
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
-                        using (DataTable dt = new DataTable())
-                        {
-                            da.Fill(dt);
-                            dataGridView1.DataSource = dt;
-                        }
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        dataGridView1.DataSource = dt;
                     }
                 }
             }

@@ -9,6 +9,6 @@ namespace Proje_Hastane
 {
     internal class SQLBaglantisi
     {
-        public static string connectionString = ""; // Enter your connection string here
+        public static string connectionString = "Data Source=DESKTOP-QA0JDBU\\SQLEXPRESS;Initial Catalog=HastaneProje;Integrated Security=True;"; 
     }
 }
