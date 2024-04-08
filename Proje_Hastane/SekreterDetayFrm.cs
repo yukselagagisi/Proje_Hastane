@@ -16,7 +16,7 @@ namespace Proje_Hastane
     {
         SekreterGirisFrm _sekreterGirisFrm;
         string _TCNO;
-        List<DataRow> _branslar = new List<DataRow>();
+        DataTable _branslar = new DataTable();
         System.Int32 _randevuID;
 
         public SekreterDetayFrm(SekreterGirisFrm sekreterGirisFrm, string TCNO)
@@ -26,7 +26,7 @@ namespace Proje_Hastane
             _TCNO = TCNO;
         }
 
-        public List<DataRow> Branslar
+        public DataTable Branslar
         {
             get { return _branslar; }
         }
@@ -89,11 +89,8 @@ namespace Proje_Hastane
                         BransCmb.DisplayMember = "BRANŞ";
                         BransCmb.DataSource = dt;
                         BransCmb.SelectedIndex = -1;
-                        
-                        foreach (DataRow dr in dt.Rows) 
-                        {
-                            _branslar.Add(dr);
-                        }
+
+                        _branslar = dt;
                     }
                 }
                 conn.Close();

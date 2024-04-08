@@ -42,11 +42,10 @@ namespace Proje_Hastane
         {
             DoktorListele();
 
-            // Branş Comboboxını Doldurma
-            foreach (DataRow brans in _sekreterDetayFrm.Branslar)
-            {
-                BransCmb.Items.Add(brans[1]);
-            }
+            BransCmb.ValueMember = "ID";
+            BransCmb.DisplayMember = "BRANŞ";
+            BransCmb.DataSource = _sekreterDetayFrm.Branslar;
+            BransCmb.SelectedIndex = -1;
         }
 
         private void EkleBtn_Click(object sender, EventArgs e)
